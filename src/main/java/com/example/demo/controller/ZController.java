@@ -12,19 +12,24 @@ import com.example.demo.service.DemoServiceImpl;
 @RequestMapping(path = "/demo")
 public class ZController {
 
-	@Autowired
-	private DemoServiceImpl demoServiceImpl;
+	//@Autowired
+	private static DemoServiceImpl demoServiceImpl=new DemoServiceImpl();
 	
 	@GetMapping(path = "testGet")
-	public String testRest() {
+	public static String testRest() {
 		System.out.println("Hello world!");
 		try {
 			return demoServiceImpl.testRest();
-		} catch (CustomDemoException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			
+			System.err.println("Exception occured in Controller");
 			return "ExceptionOccured";
 		}
+	}
+	
+	
+	public static void main(String[] args) {
+		testRest();
 	}
 }
